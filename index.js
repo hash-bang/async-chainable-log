@@ -33,12 +33,23 @@ module.exports = function() {
 
 	this.logDefaults = function() {
 		var calledAs = this._getOverload(arguments);
-		if (calledAs != 'object') throw new Error('Unknown async-chainable-log#logDefaults() style: ' + calledAs);
 
-		this._struct.push({
-			type: 'logDefaults',
-			options: arguments[0],
-		});
+		switch (calledAs) {
+			case 'object':
+				this._struct.push({
+					type: 'logDefaults',
+					options: arguments[0],
+				});
+				break;
+			case 'function':
+				this._struct.push({
+					type: 'logDefaults',
+					options: {callback: arguments[0]},
+				});
+				break;
+			default:
+				throw new Error('Unknown async-chainable-log#logDefaults() style: ' + calledAs);
+		}
 
 		return this;
 	};

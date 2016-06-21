@@ -70,4 +70,29 @@ describe('async-chainable-log - simple logging to console', function() {
 				finish();
 			});
 	});
+
+	it('should log to a custom function when only passed a closure', function(finish) {
+		var logged = [];
+
+		asyncChainable()
+			.use(asyncChainableLog)
+			.logDefaults(function(text) {
+				var args = Array.prototype.slice.call(arguments, 0);
+				console.log('LOG!', args.join(''));
+				logged.push(args.join(''));
+			})
+			.log('Log entry 1')
+			.then(function(next) {
+				setTimeout(next, 1000);
+			})
+			.log('Log entry 2')
+			.log('Log entry 3')
+			.end(function(err) {
+				expect(err).to.not.be.ok;
+				expect(logged).to.be.an.array;
+				expect(logged).to.be.length(3);
+				expect(logged).to.deep.equal(['Log entry 1', 'Log entry 2', 'Log entry 3']);
+				finish();
+			});
+	});
 });
