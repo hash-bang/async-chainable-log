@@ -1,11 +1,11 @@
 {
   "name": "async-chainable-log",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Plugin for async-chainable that provides simple logging",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hash-bang/async-chainable-nightmare"
+    "url": "https://github.com/hash-bang/async-chainable-log"
   },
   "license": "MIT",
   "keywords": [
@@ -23,10 +23,13 @@
     "test": "mocha test"
   },
   "devDependencies": {
-    "async-chainable": "^1.7.15",
-    "chai": "^1.10.0",
-    "istanbul": "^0.3.5",
-    "mocha": "^2.4.5",
-    "mocha-istanbul": "^0.2.0"
+    "async-chainable": "^2.0.0",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.2",
+    "mocha-istanbul": "^0.3.0"
+  },
+  "dependencies": {
+    "async-chainable": "^2.0.0"
   }
 }
