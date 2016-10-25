@@ -1,6 +1,6 @@
 {
   "name": "async-chainable-log",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Plugin for async-chainable that provides simple logging",
   "main": "index.js",
   "repository": {
@@ -30,6 +30,7 @@
     "mocha-istanbul": "^0.3.0"
   },
   "dependencies": {
+    "argy": "^1.3.1",
     "async-chainable": "^2.0.0"
   }
 }

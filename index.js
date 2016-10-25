@@ -1,3 +1,5 @@
+var argy = require('argy');
+
 module.exports = function() {
 	// log() {{{
 	this._plugins['log'] = function(params) {
@@ -32,24 +34,24 @@ module.exports = function() {
 	};
 
 	this.logDefaults = function() {
-		var calledAs = this._getOverload(arguments);
+		var chain = this;
 
-		switch (calledAs) {
-			case 'object':
-				this._struct.push({
+		argy(arguments)
+			.ifForm('object', function(settings) {
+				chain._struct.push({
 					type: 'logDefaults',
-					options: arguments[0],
+					options: settings,
 				});
-				break;
-			case 'function':
-				this._struct.push({
+			})
+			.ifForm('function', function(callback) {
+				chain._struct.push({
 					type: 'logDefaults',
-					options: {callback: arguments[0]},
+					options: {callback: callback},
 				});
-				break;
-			default:
-				throw new Error('Unknown async-chainable-log#logDefaults() style: ' + calledAs);
-		}
+			})
+			.ifFormElse(function(form) {
+				throw new Error('Unknown async-chainable-log#logDefaults() style: ' + form);
+			});
 
 		return this;
 	};
